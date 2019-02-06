@@ -6,15 +6,12 @@ const bodyParser = require('body-parser');
 const client = require('prom-client');
  
 // enable prom-client to expose default application metrics
-const collectDefaultMetrics = client.collectDefaultMetrics;
- 
-// define a custom prefix string for application metrics
-collectDefaultMetrics({ prefix: 'my_application:' });
- 
+client.collectDefaultMetrics();
+
 // a custom histogram metric which represents the latency
 // of each call to our API /api/greeting.
 const histogram = new client.Histogram({
-  name: 'my_application:hello_duration',
+  name: 'hello_duration',
   help: 'Duration of HTTP requests in ms',
   labelNames: ['method', 'status_code'],
   buckets: [0.1, 5, 15, 50, 100, 500]

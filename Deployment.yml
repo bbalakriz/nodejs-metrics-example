@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: nodejs-prom-example
+    version: v1
+  name: nodejs-prom-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-prom-example
+      version: v1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        kiali.io/runtimes: nodejs
+      labels:
+        app: nodejs-prom-example
+        version: v1
+    spec:
+      containers:
+      - image: jotak/nodejs-prom-example:latest
+        imagePullPolicy: IfNotPresent
+        name: nodejs-prom-example
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        securityContext:
+          privileged: false
