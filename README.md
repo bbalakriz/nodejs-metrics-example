@@ -13,3 +13,11 @@ oc apply -f Deployment.yml
 oc apply -f Service.yml
 oc expose svc/nodejs-prom-example
 ```
+
+### Kiali dashboard
+
+From Kiali sources:
+
+```bash
+oc apply -f deploy/dashboards/nodejs.yaml
+```
