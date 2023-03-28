@@ -3,10 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
  
 // ********** Use the prom-client module to expose our metrics to Prometheus
-// const client = require('prom-client');
+ const client = require('prom-client');
  
 // ********** enable prom-client to expose default application metrics
-// client.collectDefaultMetrics();
+ client.collectDefaultMetrics();
 
 // a custom histogram metric which represents the latency
 // of each call to our API /api/greeting.
@@ -35,9 +35,9 @@ app.use('/api/greeting', (request, response) => {
 });
  
 // ********** expose our metrics at the default URL for Prometheus
-//app.get('/metrics', (request, response) => {
-  //response.set('Content-Type', client.register.contentType);
-  //response.send(client.register.metrics());
-//});
+app.get('/metrics', (request, response) => {
+  response.set('Content-Type', client.register.contentType);
+  response.send(client.register.metrics());
+});
  
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
