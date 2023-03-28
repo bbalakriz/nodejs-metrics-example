@@ -27,7 +27,7 @@ metadata:
   name: nodejsapp-prometheus-service-monitor
 spec:
   endpoints:
-  - path: /prometheus
+  - path: /metrics
     port: 8080-tcp
   selector:
     matchLabels:
