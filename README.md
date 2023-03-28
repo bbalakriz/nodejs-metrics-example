@@ -19,3 +19,17 @@ New `metrics` endpoint should be available
 ### Scrape from prometheus
 
 Include a `ServiceMonitor` to auto scrape the `metrics` endpoint
+
+```
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nodejsapp-prometheus-service-monitor
+spec:
+  endpoints:
+  - path: /prometheus
+    port: 8080-tcp
+  selector:
+    matchLabels:
+      app: nodejs-metrics-app
+```
